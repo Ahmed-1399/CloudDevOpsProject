@@ -1,0 +1,44 @@
+plugins {
+    id 'org.springframework.boot' version '3.1.0'
+    id 'io.spring.dependency-management' version '1.1.0'
+    id 'java'
+    id "org.sonarqube" version "4.3.1.3277"
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+// Compatible with Java JDK-21
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf' 
+    implementation 'org.springframework.boot:spring-boot-starter'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+/* By specifying this class, Spring Boot ensures that the application will run correctly 
+      inside a Docker container or when building with Gradle. */
+springBoot {
+    mainClass = 'com.example.demo.DemoApplication'  // Set your main class
+}
+
+sonarqube {
+    properties {
+        property "sonar.host.url", "http://localhost:9000"
+        property "sonar.projectKey", "ivolve"
+        property "sonar.login", "sqa_75ed7ff0cdaaac1a030b22a7450a4775005b09d2"
+    }
+}
